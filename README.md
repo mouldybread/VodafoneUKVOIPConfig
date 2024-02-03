@@ -7,7 +7,7 @@ As of writing Vodafone ships a router with a built in component that will allow 
   ```
 
 ## Sources
-Most of the information contained here is from [this thread]([https://forum.vodafone.co.uk/t5/Landline/Landline-phone-with-own-router-on-FTTP/](https://forum.vodafone.co.uk/t5/Landline/Landline-phone-with-own-router-on-FTTP/m-p/2709457/highlight/true#M1354)) on the vodafone forums.
+Most of the information contained here is from [this thread](https://forum.vodafone.co.uk/t5/Landline/Landline-phone-with-own-router-on-FTTP/](https://forum.vodafone.co.uk/t5/Landline/Landline-phone-with-own-router-on-FTTP/m-p/2709457/highlight/true#M1354)) on the vodafone forums.
 
 This sprawling thread is essentially the authority on the subject. I'm going to condense it down for my own reference and deploy a WP810. In the hopes that this may help someone else, here are my notes. All credit goes to the members there sharing their hard work. 
 
