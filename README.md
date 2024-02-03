@@ -15,11 +15,11 @@ This sprawling thread is essentially the authority on the subject. I'm going to 
 
 This is actually the easy part but there are a huge number of wrong/outdated/incomplete guides/notes/posts. Helpfully I had a confirmed working Polycom phone on hand to test my network settings. But in short, no, you don't have to use a DMZ, port forward, or open up anything. 
 
-First I found [this post](https://www.3cx.com/docs/pfsense-firewall/) with some nice short instructions for Pfsense. Step 2 is completed on OPNsense by going to Firewall -> NAT -> Outbound and adding a selecting "Hybrid outband NAT rule generation".
+First I found [this post](https://www.3cx.com/docs/pfsense-firewall/) with some nice short instructions for Pfsense. Step 2 is completed on OPNsense by going to Firewall -> NAT -> Outbound and adding a selecting "Hybrid outbound NAT rule generation".
 
-Step 1 is completed by making an alias Alias under Firewall -> Aliases and added my Polycom to the list. Then I went back to Firewall -> NAT -> Outbound and added a manual rule, Interface: WAN Source:VOIPDEVICES(Alias) Source Port: tcp/udp/* Destination:* Destomation Port: tcp/udp/* NAT address: Interface Address NAT Port * Static Port: YES
+Step 1 is completed by making an alias Alias under Firewall -> Aliases and added my Polycom to the list. Then I went back to Firewall -> NAT -> Outbound and added a manual rule, Interface: WAN Source:VOIPDEVICES(Alias) Source Port: tcp/udp/* Destination:* Destination Port: tcp/udp/* NAT address: Interface Address NAT Port * Static Port: YES
 
-Static port being the important part. Contary to the title of the section in the 3CX documentation this is not port forwarding. This should be ensuring that the source port of SIP packets are not rewritten by the firewall.
+Static port being the important part. Contary to the title of the section in the 3CX documentation this is not port forwarding. This should ensure that the source port of SIP packets are not rewritten by the firewall.
 
 Finally I added rules to permit all outbound traffic from the VOIP phones alias. Not ideal but easy enough to tighten later.
 
@@ -32,7 +32,7 @@ That's all it took for me to make my Polycom phone work, and later on the WP810.
 Ripshod very kindly posted screenshots of his configuration [here](https://forum.vodafone.co.uk/t5/Landline/Landline-phone-with-own-router-on-FTTP/m-p/2734408/highlight/true#M2802)
 for download from [here](https://drive.google.com/drive/folders/1aquAVMgOeln9x0-O_nRCGQL-dzxZrFhi?usp=sharing)
 
-I followed these settings almost exactly as is for my WP810 with one exception. I set "Local RTP Port Range" to 200. The pictures show 24, however according to the pop up help tip, this is outside of the acceptable range. I did not put a space betwen "Vox3.0". The one or two missing options were inconsequential.
+I followed these settings almost exactly as is for my WP810 with one exception. I set "Local RTP Port Range" to 200. The pictures show 24, however according to the pop up help tip, this is outside of the acceptable range. I did not put a space between "Vox3.0". The one or two missing options were inconsequential.
 
 I will note that for the OPNSense configuration posted above, the correct NAT traversal is as shown: "No." I did provide a stun server address but I didn't use it. I also entered my current external IP. I do know it doesn't change very often but I suspect if it does I will have to update it manually. Selecting the STUN option for NAT traversal did not work.
 
