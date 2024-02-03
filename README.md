@@ -148,3 +148,7 @@ SIP Port should be 5065 and the RTP Port should be 10000
 
 Sometimes, once you have the correct settings you have to reboot the ATA to get them working. As noted [here](https://forum.vodafone.co.uk/t5/Landline/Landline-phone-with-own-router-on-FTTP/m-p/2734431/highlight/true#M2808).
 
+## Asterisk
+
+User clayface very helpfully kick started the effort to make all this work by posting a working config for Asterisk [here](https://github.com/clayface/VF-UK-Asterisk-config)
+
