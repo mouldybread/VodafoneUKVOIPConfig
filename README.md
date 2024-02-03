@@ -121,6 +121,7 @@ Remember to click on the "Update" and "Apply" buttons located at the bottom of e
 ### Purchased a Grandstream HT813 telephone adapter?
 The HT813 is an analog telephone adapter that features 1 analog telephone FXS port and 1 PSTN line FXO port in order to offer backup lifeline support using a PSTN line. Additional UK regional settings are required for this model and I have included them below.
 Navigate to the FXO PORT page:
+
 + Caller ID Scheme: SIN 227 - BT
 + FSK Caller ID Seizure Bits: 96
 + FSK Caller ID Mark Bits: 55
