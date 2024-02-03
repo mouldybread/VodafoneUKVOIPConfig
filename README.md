@@ -21,7 +21,11 @@ Step 1 is completed by making an alias Alias under Firewall -> Aliases and added
 
 Static port being the important part. Contary to the title of the section in the 3CX documentation this is not port forwarding. This should be ensuring that the source port of SIP packets are not rewritten by the firewall.
 
-That's all it took for me to make my Polycom phone work, and later on the WP810, just add its IP to the alias list. I think the rule can be tightened but it shouldn't cause any issues as is.
+Finally I added rules to permit all outbound traffic from the VOIP phones alias. Not ideal but easy enough to tighten later.
+
+Then I found [this](https://www.reddit.com/r/opnsense/comments/16n2fr3/voipdectbasestation_behind_opnsense_firewall/?rdt=52318) post which also seemed to say it should be this simple.
+
+That's all it took for me to make my Polycom phone work, and later on the WP810. Just add the new IP to the VOIP alias list.
 
 ## WP810 Configuration
 
