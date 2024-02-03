@@ -136,13 +136,13 @@ Navigate to the FXO PORT page:
 ## Connection settings
 General connection settings from [here](https://forum.vodafone.co.uk/t5/Landline/Landline-phone-with-own-router-on-FTTP/m-p/2741048/highlight/true#M3334)
  
-Primary SIP Server: resvoip.vodafone.co.uk
-Outbound Proxy: As provided by vodafone
-SIP UserID and Authenticate ID: As provided by vodafone
-Authenticate Password: As provided by vodafone
-DNS mode has to be on SRV
-Use NAT IP I set to be my static IP that Vodafone gave me
-SIP User-Agent set as Vox 3.0
++ Primary SIP Server: resvoip.vodafone.co.uk
++ Outbound Proxy: As provided by vodafone
++ SIP UserID and Authenticate ID: As provided by vodafone
++ Authenticate Password: As provided by vodafone
++ DNS mode has to be on SRV
++ Use NAT IP I set to be my static IP that Vodafone gave me
++ SIP User-Agent set as Vox 3.0
 
 SIP Port should be 5065 and the RTP Port should be 10000
 
