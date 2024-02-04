@@ -19,7 +19,7 @@ First I found [this post](https://www.3cx.com/docs/pfsense-firewall/) with some 
 
 Step 1 is completed by making an alias Alias under Firewall -> Aliases and added my Polycom to the list. Then I went back to Firewall -> NAT -> Outbound and added a manual rule, Interface: WAN Source:VOIPDEVICES(Alias) Source Port: tcp/udp/* Destination:* Destination Port: tcp/udp/* NAT address: Interface Address NAT Port * Static Port: YES
 
-Static port being the important part. Contary to the title of the section in the 3CX documentation this is not port forwarding. This should ensure that the source port of SIP packets are not rewritten by the firewall.
+Static port being the important part. Contrary to the title of the section in the 3CX documentation this is not port forwarding. This should ensure that the source port of SIP packets are not rewritten by the firewall.
 
 Finally I added rules to permit all outbound traffic from the VOIP phones alias. Not ideal but easy enough to tighten later.
 
