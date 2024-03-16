@@ -27,6 +27,18 @@ Then I found [this](https://www.reddit.com/r/opnsense/comments/16n2fr3/voipdectb
 
 That's all it took for me to make my Polycom phone work, and later on the WP810. Just add the new IP to the VOIP alias list.
 
+#### Some detail on these settings
+
+Usually NAT will rewrite the source port of outbound packets as they traverse the router and keep track of the changes in the state table. When it recieves the resulting inbound packets it will rewrite the destination port to match the original and send the packet over the LAN, allowing two outbound connections with the same source port to traverse the NAT at the same time.
+
+This causes an issue for RTP(see [here](https://www.sonicwall.com/support/knowledge-base/troubleshooting-a-scenario-where-source-remap-is-causing-the-voip-issues/170504967157192/) for an explanation).
+
+To work around this we can use the amazing versatility of OPNSense to disable source port remapping for our VOIP phone. We do this with the above OUTBOUND nat rule that specifies all packets from the phone as STATIC=YES. Hence we also specify the phones alias as the matching source, because we really need this feature for every other device on the network.
+
+However there are further considerations. RTP by default uses a random UDP port from 10000-32767. Ripshods configuration restricts the RTP port range to 20 from a base port of 10000. This though is suboptimal, picking a random unused source port is especially important as we have disabled outbound remapping. A bigger range is better. The phone is unaware of which ports are in use. If something else is (or has) been using UDP/10000(for example), the call will fail(this is the problem that remapping aims to fix after all). So a bigger range is better and relying on a single port or small pool may cause intermittent issues.
+
+The elegance of this approach though is that we do not have to expose anything to the internet. No DMZ, no port mapping - which would be the other way around this issue.
+
 ## WP810 Configuration
 
 Ripshod very kindly posted screenshots of his configuration [here](https://forum.vodafone.co.uk/t5/Landline/Landline-phone-with-own-router-on-FTTP/m-p/2734408/highlight/true#M2802)
