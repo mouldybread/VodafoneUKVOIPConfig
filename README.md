@@ -47,11 +47,11 @@ RTP by default uses a random UDP port from 10000-32767. Ripshods configuration r
 Ripshod very kindly posted screenshots of his configuration [here](https://forum.vodafone.co.uk/t5/Landline/Landline-phone-with-own-router-on-FTTP/m-p/2734408/highlight/true#M2802)
 for download from [here](https://drive.google.com/drive/folders/1aquAVMgOeln9x0-O_nRCGQL-dzxZrFhi?usp=sharing)
 
-I followed these settings almost exactly as is for my WP810 with one exception. I set "Local RTP Port Range" to 200. The pictures show 24, however according to the pop up help tip, this is outside of the acceptable range. I did not put a space between "Vox3.0". The one or two missing options were inconsequential.
+I followed these settings almost exactly as is for my WP810 with one exception. I set "Local RTP Port Range" to 200, a higher number is better for the reasons noted above. I did not put a space between "Vox3.0". The one or two missing options were inconsequential.
 
-I will note that for the OPNSense configuration posted above, the correct NAT traversal is as shown: "No." I did provide a stun server address but I didn't use it. I also entered my current external IP. I do know it doesn't change very often but I suspect if it does I will have to update it manually. Selecting the STUN option for NAT traversal did not work.
+If you are using the OPNSense configuration posted above the correct NAT traversal is as shown in the screen shots: "No." I did provide a stun server address but I was unable to get this to work and instead opted to manually enter my IP. Selecting the STUN option for NAT traversal did not work.
 
-Finally I applied some of the localisation settings as noted below.
+Finally I applied the localisation settings as noted below.
 
 ## Known working phones
 As of 17/01/2024 [from this post](https://forum.vodafone.co.uk/t5/Landline/Landline-phone-with-own-router-on-FTTP/m-p/2744752/highlight/true#M3565)
@@ -79,15 +79,15 @@ Vodafone answers DNS queries with SRV records. However your device MUST USE VODA
 + Primary DNS: 90.255.255.91
 + Secondary DNS: 90.255.255.255
 
-## USERNAME/PASSWORD
+## Username & Password
 
 You will need to contact Vodafone via their live chat to request your VOIP username, password & server. You may need to make it clear that you are requesting your VOIP credentials and not your broadband credentials. You should guard these credentials. You are unable to change them and, if obtained, can be used to place phone calls that will be billed to your account. 
 
-## THE PROXY SERVER
+## The SIP Proxy Server
 
 When you request your details from Vodafone they should give you the address of your SIP (proxy) server. The first agent I spoke to did not do this, and I spent some time trying other servers published on line. This did not work. So it seems that you MUST use the proxy server address provided to you by Vodafone.
 
-## LOCALISATION
+## Localisation
 Grandstream devices often come configured for the american market and may require localisation for use the in the UK. The details are as follows, copied from the great post [here](https://forum.vodafone.co.uk/t5/Landline/Landline-phone-with-own-router-on-FTTP/m-p/2740553/highlight/true#M3287)
 
 As an example, on the Grandstream HT812 configure with the following:
@@ -137,7 +137,7 @@ Navigate to the ADVANCED SETTINGS page:
 
 Remember to click on the "Update" and "Apply" buttons located at the bottom of every page to save and activate the changes.
 
-### Purchased a Grandstream HT813 telephone adapter?
+#### Purchased a Grandstream HT813 telephone adapter?
 The HT813 is an analog telephone adapter that features 1 analog telephone FXS port and 1 PSTN line FXO port in order to offer backup lifeline support using a PSTN line. Additional UK regional settings are required for this model and I have included them below.
 Navigate to the FXO PORT page:
 
