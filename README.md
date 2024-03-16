@@ -29,7 +29,7 @@ That's all it took for me to make my Polycom phone work, and later on the WP810.
 
 #### Some detail on these settings
 
-Usually NAT will rewrite the source port of outbound packets as they traverse the router and keep track of the changes in the state table. When it recieves the resulting inbound packets it will rewrite the destination port to match the original and send the packet over the LAN, allowing two outbound connections with the same source port to traverse the NAT at the same time.
+Usually NAT will rewrite the source port of outbound packets as they traverse the router and keep track of the changes in the state table. When it receives the resulting inbound packets it will rewrite the destination port to match the original and send the packet over the LAN, allowing two outbound connections with the same source port to traverse the NAT at the same time.
 
 This causes an issue for RTP(see [here](https://www.sonicwall.com/support/knowledge-base/troubleshooting-a-scenario-where-source-remap-is-causing-the-voip-issues/170504967157192/) for an explanation).
 
