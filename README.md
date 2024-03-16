@@ -29,9 +29,9 @@ Method three is to use Outbound NAT rules to disable source port rewriting for p
 
 + Step 2: Create a port alias that references the SIP port(5065 for Vodafone, may vary for other providers) and the RTP port range. The instructions below specify the starting port as 10000 with a range of 200. However usually RTP uses a range of 10000-32767.
 
-+ Step 3: Apply a firewall rule(s) to the relevant LAN interface that allows OUTBOUND connections from the host alias we set up in step one. Depending on your configuration you will need to allow TCP/UDP connections via the port ranges specified in the alias we created in step 2.
++ Step 3: Apply a firewall rule(s) to the relevant LAN interface that allows OUTBOUND connections from the host alias we set up in step 1. Depending on your configuration you will need to allow TCP/UDP connections via the port ranges specified in the alias we created in step 2.
 
-+ Step 4: Go to Firewall -> NAT -> Outbound and selecting "Hybrid outbound NAT rule generation".
++ Step 4: Go to Firewall -> NAT -> Outbound and select "Hybrid outbound NAT rule generation".
 
 + Step 5: Go to Firewall -> NAT -> Outbound and add a manual rule, Interface: WAN Source:(The alias we created in step 1) Source Port: (The port alias we created in step 2) Destination:* Destination Port: tcp/udp/* NAT address: Interface Address NAT Port * Static Port: YES
 
