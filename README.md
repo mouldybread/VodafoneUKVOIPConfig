@@ -41,7 +41,7 @@ Method three is to use Outbound NAT rules to disable source port rewriting for p
 
 #### RTP Port Range Considerations
 
-RTP by default uses a random UDP port from 10000-32767. The phone is unaware of which ports are in use. If something else is (or has) been using UDP/10000(for example), the call will fail until the relevant state table entry expires. This is the problem that remapping aims to fix after all, and we have disabled it.
+RTP by default uses a random UDP port from 10000-32767. The phone is unaware of which source ports are in use by other devices on the network. If something else is (or has) been using UDP/10000 for example, the call will fail until the relevant state table entry expires. This is the problem that remapping aims to fix after all, and we have disabled it.
 
 Ripshods configuration restricts the RTP port range to 20 from a base port of 10000. In cases where you are unable to dynamically limit the scope of source port remapping(ie. you're not using opnsense/pfsense) this limits the ports that you 'lose' to the workaround and decreases the chance of a conflict. However this is suboptimal and unnecessary when using Outbound NAT rules. A bigger range decreases the chance of a conflict and does not impact other devices.  Relying on a single port or small pool increases the chances of port conflicts and intermittent connectivity issues.
 
