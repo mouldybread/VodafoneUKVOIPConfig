@@ -1,7 +1,7 @@
 # Vodafone UK VOIP Residential FTTP Configuration notes
 A reference for using your own VOIP hardware (Grandstream WP810) with Vodafone UK Residential FTTP + OPNSense
 
-As of writing Vodafone ships a router with a built in component that will allow you to connect your existing PTSN phone to the Vodafone VOIP network. This should mean you can connect any of your existing VOIP equipment to their network. However because money, Vodafone would rather residential customers be unable to use their own equipment. [Here it is in their own words.](https://forum.vodafone.co.uk/t5/Landline/Landline-phone-with-own-router-on-FTTP/m-p/2744786/highlight/true#M3568):
+As of writing Vodafone ships a router with a built in component that will allow you to connect your existing PTSN phone to the Vodafone VOIP network. There is no sound technical reason to prevent you from using your own VOIP hardware via your own router. However because money, Vodafone would rather residential customers be unable to use their own equipment. [Here it is in their own words.](https://forum.vodafone.co.uk/t5/Landline/Landline-phone-with-own-router-on-FTTP/m-p/2744786/highlight/true#M3568):
   ```
     “As this is a consumer Home Broadband service and not a business service where this is explicitly provided, Vodafone are unable to offer this as a service to the customer”
   ```
