@@ -11,33 +11,36 @@ Most of the information contained here is from [this thread](https://forum.vodaf
 
 This sprawling thread is essentially the authority on the subject. I'm going to condense it down for my own reference and deploy a WP810. In the hopes that this may help someone else, here are my notes. All credit goes to the members there sharing their hard work. 
 
-## OPNSense VOIP / SIP Configuration.
+## Configuring PFSense & OPNSense for VOIP via NAT
 
-This is actually the easy part but there are a huge number of wrong/outdated/incomplete guides/notes/posts. Helpfully I had a confirmed working Polycom phone on hand to test my network settings. But in short, no, you don't have to use a DMZ, port forward, or open up anything. 
+This section is only relevant if you are using OPNSense or PFSense as your router. If you are using different firmware you will need to find another way to achieve the following, though the basic principle should be the same. This section should also apply to other VOIP providers.
 
-First I found [this post](https://www.3cx.com/docs/pfsense-firewall/) with some nice short instructions for Pfsense. Step 2 is completed on OPNsense by going to Firewall -> NAT -> Outbound and adding a selecting "Hybrid outbound NAT rule generation".
+SIP uses RTP to transport audio data. By default, NAT rewrites the source port of traffic to enable multiple outbound connections to use the same source port, as no two devices can know which ports are in use. This causes a problem for RTP as described [here](https://www.sonicwall.com/support/knowledge-base/troubleshooting-a-scenario-where-source-remap-is-causing-the-voip-issues/170504967157192/)
 
-Step 1 is completed by making an alias Alias under Firewall -> Aliases and added my Polycom to the list. Then I went back to Firewall -> NAT -> Outbound and added a manual rule, Interface: WAN Source:VOIPDEVICES(Alias) Source Port: tcp/udp/* Destination:* Destination Port: tcp/udp/* NAT address: Interface Address NAT Port * Static Port: YES
+There are three ways to work around this, only one of which is safe.
 
-Static port being the important part. Contrary to the title of the section in the 3CX documentation this is not port forwarding. This should ensure that the source port of SIP packets are not rewritten by the firewall.
+Method one is to put your phone in a DMZ which will fully expose it to the internet. This is bad for obvious reasons.
 
-Finally I added rules to permit all outbound traffic from the VOIP phones alias. Not ideal but easy enough to tighten later.
+Method two is to port forward the relevant UDP ports. This is ugly but it works. It allows anyone on the internet to send packets to your phone which is just generally a bad thing to do, and you may have to forward a large range which now won’t work for other devices causing connectivity issues.
 
-Then I found [this](https://www.reddit.com/r/opnsense/comments/16n2fr3/voipdectbasestation_behind_opnsense_firewall/?rdt=52318) post which also seemed to say it should be this simple.
+Method three is to use Outbound NAT rules to disable source port rewriting for packets originating from your phone. This does not expose your phone and safely allows RTP to traverse the NAT while reducing the chance of a port conflict. 
 
-That's all it took for me to make my Polycom phone work, and later on the WP810. Just add the new IP to the VOIP alias list.
++ Step 1: Create a host alias that references your phones IP or hostname.
 
-#### Some detail on these settings
++ Step 2: Create a port alias that references the SIP port(5065 for Vodafone, may vary for other providers) and the RTP port range. The instructions below specify the starting port as 10000 with a range of 200. However usually RTP uses a range of 10000-32767.
 
-Usually NAT will rewrite the source port of outbound packets as they traverse the router and keep track of the changes in the state table. When it receives the resulting inbound packets it will rewrite the destination port to match the original and send the packet over the LAN, allowing two outbound connections with the same source port to traverse the NAT at the same time.
++ Step 3: Apply a firewall rule(s) to the relevant LAN interface that allows OUTBOUND connections from the host alias we set up in step one. Depending on your configuration you will need to allow TCP/UDP connections via the port ranges specified in the alias we created in step 2.
 
-This causes an issue for RTP(see [here](https://www.sonicwall.com/support/knowledge-base/troubleshooting-a-scenario-where-source-remap-is-causing-the-voip-issues/170504967157192/) for an explanation).
++ Step 4: Go to Firewall -> NAT -> Outbound and selecting "Hybrid outbound NAT rule generation".
 
-To work around this we can use the amazing versatility of OPNSense to disable source port remapping for our VOIP phone. We do this with the above OUTBOUND nat rule that specifies all packets from the phone as STATIC=YES. Hence we also specify the phones alias as the matching source, because we really need this feature for every other device on the network.
++ Step 5: Go to Firewall -> NAT -> Outbound and add a manual rule, Interface: WAN Source:(The alias we created in step 1) Source Port: (The port alias we created in step 2) Destination:* Destination Port: tcp/udp/* NAT address: Interface Address NAT Port * Static Port: YES
 
-However there are further considerations. RTP by default uses a random UDP port from 10000-32767. Ripshods configuration restricts the RTP port range to 20 from a base port of 10000. This though is suboptimal, picking a random unused source port is especially important as we have disabled outbound remapping. A bigger range is better. The phone is unaware of which ports are in use. If something else is (or has) been using UDP/10000(for example), the call will fail(this is the problem that remapping aims to fix after all). So a bigger range is better and relying on a single port or small pool may cause intermittent issues.
+“Static port” is the option that disables source port rewriting for connections that match the rule.
 
-The elegance of this approach though is that we do not have to expose anything to the internet. No DMZ, no port mapping - which would be the other way around this issue.
+
+#### RTP Port Range Considerations
+
+RTP by default uses a random UDP port from 10000-32767. Ripshods configuration restricts the RTP port range to 20 from a base port of 10000. This though is suboptimal, picking a random unused source port is especially important as we have disabled outbound remapping. A bigger range is better. The phone is unaware of which ports are in use. If something else is (or has) been using UDP/10000(for example), the call will fail(this is the problem that remapping aims to fix after all). Relying on a single port or small pool may cause intermittent issues.
 
 ## WP810 Configuration
 
