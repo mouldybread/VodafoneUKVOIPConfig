@@ -49,7 +49,7 @@ for download from [here](https://drive.google.com/drive/folders/1aquAVMgOeln9x0-
 
 I followed these settings almost exactly as is for my WP810 with one exception. I set "Local RTP Port Range" to 200, a higher number is better for the reasons noted above. I did not put a space between "Vox3.0". The one or two missing options were inconsequential.
 
-If you are using the OPNSense configuration posted above the correct NAT traversal is as shown in the screen shots: "No." I did provide a stun server address but I was unable to get this to work and instead opted to manually enter my IP. Selecting the STUN option for NAT traversal did not work.
+If you are using the OPNSense configuration posted above the correct NAT traversal option is as shown in the screen shots: "No." I did provide a stun server address but I was unable to get this to work and instead opted to manually enter my IP. Selecting the STUN option for NAT traversal did not work.
 
 Finally I applied the localisation settings as noted below.
 
