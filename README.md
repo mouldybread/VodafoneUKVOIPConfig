@@ -23,7 +23,7 @@ Method one is to put your phone in a DMZ which will fully expose it to the inter
 
 Method two is to port forward the relevant UDP ports. This is ugly but it works. It allows anyone on the internet to send packets to your phone which is just generally a bad thing to do, and you may have to forward a large range which now won’t work for other devices causing connectivity issues.
 
-Method three is to use Outbound NAT rules to disable source port rewriting for packets originating from your phone. This does not expose your phone and safely allows RTP to traverse the NAT while reducing the chance of a port conflict. 
+Method three is to use Outbound NAT rules to disable source port rewriting for packets originating from your VOIP phone(s). This does not expose your phone and safely allows RTP to traverse the NAT while reducing the chance of a port conflict. 
 
 + Step 1: Create a host alias that references your phones IP or hostname.
 
