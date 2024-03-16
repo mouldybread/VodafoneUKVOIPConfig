@@ -37,7 +37,7 @@ Method three is to use Outbound NAT rules to disable source port rewriting for p
 
 “Static port” is the option that disables source port rewriting for connections that match the rule.
 
- <sub>This information is based on instructions from [here](https://www.3cx.com/docs/pfsense-firewall/) and [here](https://www.reddit.com/r/opnsense/comments/16n2fr3/voipdectbasestation_behind_opnsense_firewall/?rdt=52318). Note that contrary to the title of the 3CX documentation, this has nothing to do with port forwarding. </sub>
+ <sub>This information is based on instructions from [here](https://www.3cx.com/docs/pfsense-firewall/) and [here](https://www.reddit.com/r/opnsense/comments/16n2fr3/voipdectbasestation_behind_opnsense_firewall/?rdt=52318). Note that the 3CX document counter-intuitivly refers to "port mapping" in the context of outbound NAT traversal, rather than the more common inbound port to host mapping. </sub>
 
 #### RTP Port Range Considerations
 
