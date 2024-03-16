@@ -41,7 +41,7 @@ Method three is to use Outbound NAT rules to disable source port rewriting for p
 
 #### RTP Port Range Considerations
 
-RTP by default uses a random UDP port from 10000-32767. Ripshods configuration restricts the RTP port range to 20 from a base port of 10000. This though is suboptimal, picking a random unused source port is especially important as we have disabled outbound remapping. A bigger range is better. The phone is unaware of which ports are in use. If something else is (or has) been using UDP/10000(for example), the call will fail until the relevant state table entry expires. This is the problem that remapping aims to fix after all. Relying on a single port or small pool may cause intermittent issues.
+RTP by default uses a random UDP port from 10000-32767. Ripshods configuration restricts the RTP port range to 20 from a base port of 10000. This though is suboptimal, picking a random unused source port is especially important as we have disabled outbound remapping. A bigger range is better. The phone is unaware of which ports are in use. If something else is (or has) been using UDP/10000(for example), the call will fail until the relevant state table entry expires. This is the problem that remapping aims to fix after all. Relying on a single port or small pool increases the chances of port conflicts and intermittent connectivity issues.
 
 ## WP810 Configuration
 
