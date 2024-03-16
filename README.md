@@ -15,7 +15,7 @@ This sprawling thread is essentially the authority on the subject. I'm going to 
 
 This section is only relevant if you are using OPNSense or PFSense as your router. If you are using different firmware you will need to find another way to achieve the following, though the basic principle should be the same. This section should also apply to other VOIP providers.
 
-SIP uses RTP to transport audio data. By default, NAT rewrites the source port of traffic to enable multiple outbound connections to use the same source port, as no two devices can know which ports are in use. This causes a problem for RTP as described [here](https://www.sonicwall.com/support/knowledge-base/troubleshooting-a-scenario-where-source-remap-is-causing-the-voip-issues/170504967157192/)
+SIP uses RTP to transport audio data. By default, NAT rewrites the source port of traffic to enable multiple outbound connections to use the same source port, as no two devices can know which ports are in use. This causes a problem for SIP as described [here](https://www.sonicwall.com/support/knowledge-base/troubleshooting-a-scenario-where-source-remap-is-causing-the-voip-issues/170504967157192/)
 
 There are three ways to work around this, only one of which is safe.
 
