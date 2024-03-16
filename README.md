@@ -19,7 +19,7 @@ SIP uses RTP to transport audio data. By default, NAT rewrites the source port o
 
 There are three ways to work around this, only one of which is safe.
 
-Method one is to put your phone in a DMZ which will fully expose it to the internet. This is bad for obvious reasons, but there are lots of posts telling you do to this to make VOIP work. **Don't do it, under any circumstance.**
+Method one is to put your phone in a DMZ which will fully expose it to the internet. This is bad for obvious reasons, but there are lots of posts telling you to do this to make VOIP work. **Don't do it, under any circumstance.**
 
 Method two is to port forward the relevant ports. This is ugly but it may appear to work. It allows anyone on the internet to send packets to your phone and you may have to forward a range of ports which now won’t work for other devices causing connectivity issues. There are also lots of instructions telling you to do this. **Don't do it, it will break more than your VOIP. You're essentially unleashing a chaos monkey.**
 
