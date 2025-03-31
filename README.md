@@ -48,7 +48,7 @@ Ripshod's configuration restricts the RTP port range to 20 from a base port of 1
 ## WP810 Configuration
 
 Ripshod very kindly posted screenshots of his configuration [here](https://forum.vodafone.co.uk/t5/Landline/Landline-phone-with-own-router-on-FTTP/m-p/2734408/highlight/true#M2802)
-for download from [here](https://drive.google.com/drive/folders/1aquAVMgOeln9x0-O_nRCGQL-dzxZrFhi?usp=sharing)
+but the original download is now missing. They are instead included in the section below.
 
 I followed these settings almost exactly as is for my WP810 with one exception. I set "Local RTP Port Range" to 200, a higher number is better for the reasons noted above. I did not put a space between "Vox3.0". The one or two missing options were inconsequential.
 
