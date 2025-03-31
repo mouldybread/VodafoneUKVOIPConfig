@@ -1,9 +1,9 @@
 # Vodafone UK VOIP Residential FTTP Configuration notes
 A reference for using your own VOIP hardware (Grandstream WP810) with Vodafone UK Residential FTTP + OPNSense
 
-As of writing Vodafone ships a router with a built in component that will allow you to connect your existing PTSN phone to the Vodafone VOIP network. There is no sound technical reason to prevent you from using your own VOIP hardware via your own router. However because money, Vodafone would rather residential customers be unable to use their own equipment. [Here it is in their own words.](https://forum.vodafone.co.uk/t5/Landline/Landline-phone-with-own-router-on-FTTP/m-p/2744786/highlight/true#M3568):
+As of this writing, Vodafone ships a router with a built-in component that allows you to connect your existing PTSN phone to the Vodafone VOIP network. There is no sound technical reason preventing you from using your own VOIP hardware via your own router. However, for business reasons, Vodafone prefers that residential customers be unable to use their own equipment. [Here it is in their own words](https://forum.vodafone.co.uk/t5/Landline/Landline-phone-with-own-router-on-FTTP/m-p/2744786/highlight/true#M3568):
   ```
-    “As this is a consumer Home Broadband service and not a business service where this is explicitly provided, Vodafone are unable to offer this as a service to the customer”
+    "As this is a consumer Home Broadband service and not a business service where this is explicitly provided, Vodafone are unable to offer this as a service to the customer"
   ```
 
 ## Sources
@@ -21,13 +21,13 @@ There are three ways to work around this, only one of which is safe.
 
 Method one is to put your phone in a DMZ which will fully expose it to the internet. This is bad for obvious reasons, but there are lots of posts telling you to do this to make VOIP work. **Don't do it, under any circumstance.**
 
-Method two is to port forward the relevant ports. This is ugly and it may appear to work. It allows anyone on the internet to send packets to your phone and you may have to forward a range of ports which now won’t work for other devices causing connectivity issues. There are also lots of instructions telling you to do this. **Don't do it, it will break more than your VOIP. You're essentially unleashing a chaos monkey.**
+Method two is to port forward the relevant ports. This is ugly and it may appear to work. It allows anyone on the internet to send packets to your phone and you may have to forward a range of ports which now won't work for other devices causing connectivity issues. Many instructions online recommend this approach. **Don't do it, it will break more than your VOIP. You're essentially unleashing a chaos monkey.**
 
 Method three is to use Outbound NAT rules to disable source port rewriting for packets originating from your VOIP phone(s). This does not expose your phone and safely allows RTP to traverse the NAT while reducing the chance of a port conflict. 
 
-+ Step 1: Create a host alias that references your phones IP or hostname.
++ Step 1: Create a host alias that references your phone's IP or hostname.
 
-+ Step 2: Create a port alias that references the SIP port(5065 for Vodafone, may vary for other providers) and the RTP port range. The instructions below specify the starting port as 10000 with a range of 200. However usually RTP uses a range of 10000-32767.
++ Step 2: Create a port alias that references the SIP port (5065 for Vodafone, may vary for other providers) and the RTP port range. The instructions below specify the starting port as 10000 with a range of 200. However, usually RTP uses a range of 10000-32767.
 
 + Step 3: Apply a firewall rule(s) to the relevant LAN interface that allows OUTBOUND connections from the host alias we set up in step 1. Depending on your configuration you will need to allow TCP/UDP connections via the port ranges specified in the alias we created in step 2.
 
@@ -37,13 +37,13 @@ Method three is to use Outbound NAT rules to disable source port rewriting for p
 
 “Static port” is the option that disables source port rewriting for connections that match the rule.
 
- <sub>This information is based on instructions from [here](https://www.3cx.com/docs/pfsense-firewall/) and [here](https://www.reddit.com/r/opnsense/comments/16n2fr3/voipdectbasestation_behind_opnsense_firewall/?rdt=52318). Note that the 3CX document counter-intuitivly refers to "port mapping" in the context of outbound NAT traversal, rather than the more common inbound port to host mapping. </sub>
+ <sub>This information is based on instructions from [here](https://www.3cx.com/docs/pfsense-firewall/) and [here](https://www.reddit.com/r/opnsense/comments/16n2fr3/voipdectbasestation_behind_opnsense_firewall/?rdt=52318). Note that the 3CX document counter-intuitively refers to "port mapping" in the context of outbound NAT traversal, rather than the more common inbound port to host mapping. </sub>
 
 #### RTP Port Range Considerations
 
 RTP by default uses a random UDP port from 10000-32767. The phone is unaware of which source ports are in use by other devices on the local network. If something else is (or has) been using UDP/10000 for example, the call will fail until the relevant state table entry expires. This is the problem that remapping aims to fix after all, and we have disabled it.
 
-Ripshods configuration restricts the RTP port range to 20 from a base port of 10000. In cases where you are unable to dynamically limit the scope of source port remapping(ie. you're not using opnsense/pfsense) this limits the ports that you 'lose' to the workaround and decreases the chance of a conflict. However this is suboptimal and unnecessary when using Outbound NAT rules. A bigger range decreases the chance of a conflict and does not impact other devices.  Relying on a single port or small pool increases the chances of port conflicts and intermittent connectivity issues.
+Ripshod's configuration restricts the RTP port range to 20 from a base port of 10000. In cases where you are unable to dynamically limit the scope of source port remapping (i.e., you're not using OPNsense/PFsense) this limits the ports that you 'lose' to the workaround and decreases the chance of a conflict. However, this is suboptimal and unnecessary when using Outbound NAT rules. A bigger range decreases the chance of a conflict and does not impact other devices. Relying on a single port or small pool increases the chances of port conflicts and intermittent connectivity issues.
 
 ## WP810 Configuration
 
@@ -55,6 +55,40 @@ I followed these settings almost exactly as is for my WP810 with one exception. 
 If you are using the OPNSense configuration posted above the correct NAT traversal option is as shown in the screen shots: "No." I did provide a stun server address but I was unable to get this to work and instead opted to manually enter my IP. Selecting the STUN option for NAT traversal did not work.
 
 Finally I applied the localisation settings as noted below.
+
+## Configuration Screenshots
+
+Below are the configuration screenshots to help with setup. Click on any image to view it at full size.
+
+<details>
+<summary>Click to expand all configuration screenshots</summary>
+
+![Configuration Screenshot 1](screenshots/SS1.png)
+
+![Configuration Screenshot 2](screenshots/SS2.png)
+
+![Configuration Screenshot 3](screenshots/SS3.png)
+
+![Configuration Screenshot 4](screenshots/SS4.png)
+
+![Configuration Screenshot 5](screenshots/SS5.png)
+
+![Configuration Screenshot 6](screenshots/SS6.png)
+
+![Configuration Screenshot 7](screenshots/SS7.png)
+
+![Configuration Screenshot 8](screenshots/SS8.png)
+
+![Configuration Screenshot 9](screenshots/SS9.png)
+
+![Configuration Screenshot 10](screenshots/SS10.png)
+
+![Configuration Screenshot 11](screenshots/SS11.png)
+
+![Configuration Screenshot 12](screenshots/SS12.png)
+
+![Configuration Screenshot 13](screenshots/SS13.png)
+</details>
 
 ## Known working phones
 As of 17/01/2024 [from this post](https://forum.vodafone.co.uk/t5/Landline/Landline-phone-with-own-router-on-FTTP/m-p/2744752/highlight/true#M3565)
@@ -88,10 +122,10 @@ You will need to contact Vodafone via their live chat to request your VOIP usern
 
 ## The SIP Proxy Server
 
-When you request your details from Vodafone they should give you the address of your SIP (proxy) server. The first agent I spoke to did not do this, and I spent some time trying other servers published on line. This did not work. So it seems that you MUST use the proxy server address provided to you by Vodafone.
+When you request your details from Vodafone they should give you the address of your SIP (proxy) server. The first agent I spoke to did not do this, and I spent some time trying other servers published online. This did not work. So it seems that you MUST use the proxy server address provided to you by Vodafone.
 
 ## Localisation
-Grandstream devices often come configured for the american market and may require localisation for use the in the UK. The details are as follows, copied from the great post [here](https://forum.vodafone.co.uk/t5/Landline/Landline-phone-with-own-router-on-FTTP/m-p/2740553/highlight/true#M3287)
+Grandstream devices often come configured for the American market and may require localisation for use in the UK. The details are as follows, copied from the great post [here](https://forum.vodafone.co.uk/t5/Landline/Landline-phone-with-own-router-on-FTTP/m-p/2740553/highlight/true#M3287)
 
 As an example, on the Grandstream HT812 configure with the following:
 
@@ -169,4 +203,5 @@ Sometimes, once you have the correct settings you have to reboot the ATA to get 
 ## Asterisk
 
 User clayface very helpfully kick started the effort to make all this work by posting a working config for Asterisk [here](https://github.com/clayface/VF-UK-Asterisk-config)
+````
 
