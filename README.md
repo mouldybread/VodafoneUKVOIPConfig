@@ -63,31 +63,31 @@ Below are the configuration screenshots to help with setup. Click on any image t
 <details>
 <summary>Click to expand all configuration screenshots</summary>
 
-![Configuration Screenshot 1](screenshots/SS1.png)
+![Configuration Screenshot 1](screenshots/SS1.jpg)
 
-![Configuration Screenshot 2](screenshots/SS2.png)
+![Configuration Screenshot 2](screenshots/SS2.jpg)
 
-![Configuration Screenshot 3](screenshots/SS3.png)
+![Configuration Screenshot 3](screenshots/SS3.jpg)
 
-![Configuration Screenshot 4](screenshots/SS4.png)
+![Configuration Screenshot 4](screenshots/SS4.jpg)
 
-![Configuration Screenshot 5](screenshots/SS5.png)
+![Configuration Screenshot 5](screenshots/SS5.jpg)
 
-![Configuration Screenshot 6](screenshots/SS6.png)
+![Configuration Screenshot 6](screenshots/SS6.jpg)
 
-![Configuration Screenshot 7](screenshots/SS7.png)
+![Configuration Screenshot 7](screenshots/SS7.jpg)
 
-![Configuration Screenshot 8](screenshots/SS8.png)
+![Configuration Screenshot 8](screenshots/SS8.jpg)
 
-![Configuration Screenshot 9](screenshots/SS9.png)
+![Configuration Screenshot 9](screenshots/SS9.jpg)
 
-![Configuration Screenshot 10](screenshots/SS10.png)
+![Configuration Screenshot 10](screenshots/SS10.jpg)
 
-![Configuration Screenshot 11](screenshots/SS11.png)
+![Configuration Screenshot 11](screenshots/SS11.jpg)
 
-![Configuration Screenshot 12](screenshots/SS12.png)
+![Configuration Screenshot 12](screenshots/SS12.jpg)
 
-![Configuration Screenshot 13](screenshots/SS13.png)
+![Configuration Screenshot 13](screenshots/SS13.jpg)
 </details>
 
 ## Known working phones
