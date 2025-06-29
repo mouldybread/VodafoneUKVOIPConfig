@@ -5,6 +5,8 @@ As of this writing, Vodafone ships a router with a built-in component that allow
   ```
     "As this is a consumer Home Broadband service and not a business service where this is explicitly provided, Vodafone are unable to offer this as a service to the customer"
   ```
+> [!NOTE]  
+> It seems that Vodafone may have stopped [giving out the voip information](https://www.reddit.com/r/HomeNetworking/comments/1e1pbhv/has_anyone_succesfully_got_uk_vodafone_voip_to/). They have also closed and removed their forums.
 
 ## Sources
 Most of the information contained here is from [this thread](https://forum.vodafone.co.uk/t5/Landline/Landline-phone-with-own-router-on-FTTP/m-p/2709457) on the vodafone forums.
@@ -116,9 +118,14 @@ Vodafone answers DNS queries with SRV records. However your device MUST USE VODA
 + Primary DNS: 90.255.255.91
 + Secondary DNS: 90.255.255.255
 
+> [!IMPORTANT]  
+> You will note in the configuration screenshots that DNS is set to "srv" and not "Use configured IP". This, dear reader, is a little bit silly because the two options should not be mutually exclusive. This means that your DHCP server must be set to provide the device with the Vodafone DNS servers above. They cannot be set on the phone. If you are using Opnsense you can do this on a per device basis.
+
 ## Username & Password
 
 You will need to contact Vodafone via their live chat to request your VOIP username, password & server. You may need to make it clear that you are requesting your VOIP credentials and not your broadband credentials. You should guard these credentials. You are unable to change them and, if obtained, can be used to place phone calls that will be billed to your account. 
+> [!NOTE]  
+> It seems that Vodafone may have stopped [giving out the voip information](https://www.reddit.com/r/HomeNetworking/comments/1e1pbhv/has_anyone_succesfully_got_uk_vodafone_voip_to/). They have also closed and removed their forums.
 
 ## The SIP Proxy Server
 
